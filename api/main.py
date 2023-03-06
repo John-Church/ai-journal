@@ -1,5 +1,6 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, File
 import os
+from modules.speech.transcribe import transcribe
 
 app = FastAPI()
 
@@ -9,6 +10,20 @@ JOURNAL_LOCATION = "./journal_entries"
 @app.get("/")
 async def root():
     return {"message": "Hello World"}
+    
+@app.post("/transcribe")
+async def transcribe_endpoint(audio_file: bytes) -> str:
+    """
+    Transcribes an audio file using OpenAI's API.
+
+    Args:
+        audio_file (bytes, required): The audio file to be transcribed.
+
+    Returns:
+        str: The transcribed text.
+    """
+    transcript = transcribe(audio_file)
+    return transcript
 
 @app.get("/followup/")
 async def get_followup():
@@ -16,7 +31,7 @@ async def get_followup():
 
 @app.get("/convo/")
 async def get_all_conversations():
-    for file in os.listdir('/journal_entries'):
+    for file in os.listdir(JOURNAL_LOCATION):
         if file[-2:].lower() == "md":
             # File is a markdown file
             id, entry = file.split(".")[0].split("_")
