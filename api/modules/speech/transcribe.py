@@ -13,5 +13,4 @@ def transcribe(audio_file: bytes) -> str:
         str: The transcribed text.
     """
     transcript = openai.Audio.transcribe("whisper-1", audio_file)
-    print(transcript)
     return transcript
