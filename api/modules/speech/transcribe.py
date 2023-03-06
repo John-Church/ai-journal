@@ -1,7 +1,7 @@
 import openai
 
 
-def transcribe(audio_path):
+def transcribe(audio_path: str) -> str:
     """
     Transcribes an audio file using OpenAI's API.
 
@@ -13,7 +13,6 @@ def transcribe(audio_path):
     """
     audio_file = open(audio_path, "rb")
     transcript = openai.Audio.transcribe("whisper-1", audio_file)
-    print(transcript)
     return transcript
 
 
