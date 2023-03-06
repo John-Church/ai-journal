@@ -4,9 +4,15 @@ returns text of the transcription
 
 /Get endpoint receive follow up questions
 
-ingest raw text of the converstation (json)
 
-List
+
+/get endpoint add summaries of all conversations and ids
+
+/get endpoint to get a single conversation by its id. 
+
+
+/Post ingest raw text of the converstation (json)
+
 ```json
 [
     {"content": "Bla bla bla",
