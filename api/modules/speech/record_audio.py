@@ -30,3 +30,6 @@ def record_audio(duration: float = 5.0, sample_rate: int = 44100) -> str:
     print(f'Recording saved as {filename}')
 
     return filename
+
+
+record_audio()

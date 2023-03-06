@@ -1,20 +1,17 @@
 import openai
+from fastapi import File
 
 
-def transcribe(audio_path):
+def transcribe(audio_file: bytes) -> str:
     """
     Transcribes an audio file using OpenAI's API.
 
     Args:
-        audio_file_path (str): The path to the audio file to be transcribed.
+        audio_file (bytes): The audio file to be transcribed.
 
     Returns:
         str: The transcribed text.
     """
-    audio_file = open(audio_path, "rb")
     transcript = openai.Audio.transcribe("whisper-1", audio_file)
     print(transcript)
     return transcript
-
-
-transcribe("recording.wav")
